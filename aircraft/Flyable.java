@@ -1,4 +1,6 @@
-package classes;
+package aircraft;
+
+import weather.WeatherTower;
 
 public abstract class Flyable {
 	protected WeatherTower weathertower;
