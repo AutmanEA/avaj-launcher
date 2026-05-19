@@ -1,15 +1,28 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.io.File;
+import java.io.IOException;
+import java.util.Scanner;
 
 public class Main {
-	private static List<String> list = new ArrayList<>();
-
 	public static void main(String[] args) {
-		for (int i = 0; i < 1000000; i++) {
-
-			// Items keep being added but never removed
-			list.add("Item " + i);
+		if (args.length != 1) {
+			System.err.println("Program takes exactly one scenario argument");
+			return;
 		}
-		System.out.println("Finished adding items!");
+		File input = new File(args[0]);
+		File output = new File("simulation.txt");
+		try (Scanner reader = new Scanner(input)) {
+			if (!output.createNewFile()) {
+				System.err.println("File already exists.");
+				return;
+			}
+			while (reader.hasNext()) {
+				String line = reader.nextLine();
+				// TODO: parser
+				System.out.println(line);
+			}
+
+		} catch (IOException e) {
+			System.err.println("An error occured.");
+		}
 	}
 }
