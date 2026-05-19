@@ -25,3 +25,4 @@ replay_pid*
 
 # forbidden push
 _subject/
+simulation.txt
