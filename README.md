@@ -74,3 +74,9 @@ Nécessite Java (normalement OK) et graphviz:
 sudo apt install graphviz
 ```
 Redémarrer vscode et les plant UML pourront être prévisualisés.
+
+# Compilation
+
+## Build
+
+## Execution
