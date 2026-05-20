@@ -21,7 +21,12 @@ public class Coordinates {
 		return height;
 	}
 
-	public void setLongitude(int p_longitude) {
-		longitude = p_longitude;
+	void changeCoordinates(int p_longitude, int p_latitude, int p_height) {
+		this.longitude += p_longitude;
+		this.latitude += p_latitude;
+		this.height += p_height;
+		if (this.height > 100) {
+			this.height = 100;
+		}
 	}
 }

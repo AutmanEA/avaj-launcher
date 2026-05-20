@@ -3,7 +3,7 @@ package weather;
 import aircraft.Coordinates;
 
 public class WeatherProvider {
-
+	
 	private final String[] weather = {"RAIN", "FOG", "SUN", "SNOW"};
 
 	public String getCurrentWeather(Coordinates p_coordinates) {

@@ -1,16 +1,13 @@
 package simulator;
-import java.io.File;
 import java.util.ArrayList;
 
 import aircraft.AircraftFactory;
 import aircraft.Flyable;
-import weather.WeatherProvider;
 import weather.WeatherTower;
 
 public class Simulation {
 	private int simCount = 0;
 	private AircraftFactory factory = AircraftFactory.getInstance();
-	private WeatherProvider provider = WeatherProvider.getInstance();
 	private WeatherTower tower = new WeatherTower();
 
 	public Simulation(ArrayList<String> parameters) {
@@ -38,13 +35,9 @@ public class Simulation {
 		ArrayList<Flyable> flyables = new ArrayList<>(tower.getObservers());
 
 		while (simCount > 0) {
-
-
 			for (var aircraft: flyables) {
 				aircraft.updateConditions();
 			}
-
-
 			simCount--;
 		}
 
