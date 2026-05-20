@@ -11,12 +11,16 @@ public class Aircraft implements Flyable {
 	public void updateConditions() {
 
 	}
+
 	public void registerTower(WeatherTower p_tower) {
 
 	}
 
+	public String printInfos() {
+		return "Aircraft#" + name + "(" + id + ")";
+	}
 
-	protected	Aircraft(long p_id, String p_name, Coordinates p_coordinates) {
+	protected Aircraft(long p_id, String p_name, Coordinates p_coordinates) {
 
 	}
 }

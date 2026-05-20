@@ -3,12 +3,14 @@ package weather;
 import java.util.ArrayList;
 
 import aircraft.Flyable;
+import simulator.SimulationLogger;
 
 public class Tower {
 	private ArrayList<Flyable> observers = new ArrayList<Flyable>();
 
 	public void register(Flyable p_flyable) {
 		observers.add(p_flyable);
+		SimulationLogger.newLog("Tower says: " + p_flyable.printInfos() + " registered to weather tower.");
 	}
 	public void unregister(Flyable p_flyable) {
 		observers.remove(p_flyable);
