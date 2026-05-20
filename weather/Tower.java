@@ -14,8 +14,13 @@ public class Tower {
 	}
 	public void unregister(Flyable p_flyable) {
 		observers.remove(p_flyable);
+		SimulationLogger.newLog("Tower says: " + p_flyable.printInfos() + " unregistered to weather tower.");
 	}
 	protected void conditionChanged() {
 		/* */
+	}
+
+	public ArrayList<Flyable> getObservers() {
+		return observers;
 	}
 }

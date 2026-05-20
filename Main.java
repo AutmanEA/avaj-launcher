@@ -19,6 +19,15 @@ public class Main {
 			} else {
 				String regex = "^[a-zA-Z0-9_-]+\\s[a-zA-Z0-9_-]+\\s\\d+\\s\\d+\\s\\d+$";
 				if (!line.matches(regex)) throw new IllegalArgumentException();
+				String[] parseCoordinates = line.split("\\s");
+
+				int lon = Integer.parseInt(parseCoordinates[2]);
+				int lat = Integer.parseInt(parseCoordinates[3]);
+				int height = Integer.parseInt(parseCoordinates[4]);
+
+				if ((lon < 0) || (lat < 0) || (height < 0))
+					throw new NumberFormatException();
+
 				parameters.add(line);
 			}
 		}

@@ -12,6 +12,7 @@ public class AircraftFactory {
 
 	public Flyable newAircraft(String p_type, String p_name, Coordinates p_coordinates) {
 		long id = idGenerator.getAndIncrement();
+
 		switch (p_type) {
 			case "Helicopter":
 				return new Helicopter(id, p_name, p_coordinates);

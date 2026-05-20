@@ -20,4 +20,8 @@ public class Coordinates {
 	public int getHeight() {
 		return height;
 	}
+
+	public void setLongitude(int p_longitude) {
+		longitude = p_longitude;
+	}
 }

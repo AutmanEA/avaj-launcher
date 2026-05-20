@@ -3,6 +3,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 import aircraft.AircraftFactory;
+import aircraft.Flyable;
 import weather.WeatherProvider;
 import weather.WeatherTower;
 
@@ -23,17 +24,32 @@ public class Simulation {
 				int lat = Integer.parseInt(paramSplit[3]);
 				int height = Integer.parseInt(paramSplit[4]);
 
-				var newAircraft = factory.newAircraft(p_type, p_name, lon, lat, height);
+				if (height > 100)
+					height = 100;
+
+				Flyable newAircraft = factory.newAircraft(p_type, p_name, lon, lat, height);
+				System.out.println(newAircraft.printInfos());
 				tower.register(newAircraft);
 			}
 		}
 	}
 
 	public void run() {
+		ArrayList<Flyable> flyables = new ArrayList<>(tower.getObservers());
 
-	}
+		while (simCount > 0) {
 
-	public File out() {
-		return new File("NO FILE YET");
+
+			for (var aircraft: flyables) {
+				aircraft.updateConditions();
+			}
+
+
+			simCount--;
+		}
+
+
+
+
 	}
 }
