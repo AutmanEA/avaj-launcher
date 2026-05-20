@@ -1,14 +1,20 @@
 package aircraft;
 
+import simulator.SimulationLogger;
 import weather.WeatherTower;
 
-public abstract class Aircraft implements Flyable {
+public class Aircraft implements Flyable {
 	protected long			id;
 	protected String		name;
 	protected Coordinates	coordinates;
 	protected WeatherTower	weatherTower;
 
-	public abstract void updateConditions();
+	public void updateConditions() {
+		if (coordinates.getHeight() <= 0) {
+			SimulationLogger.newLog(this.printInfos() + " landing.");
+			weatherTower.unregister(this);
+		}
+	}
 
 	public void registerTower(WeatherTower p_tower) {
 		weatherTower = p_tower;

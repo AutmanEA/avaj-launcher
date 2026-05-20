@@ -17,11 +17,11 @@ public class SimulationLogger {
 		File output = new File("simulation.txt");
 
 		try (FileWriter writer = new FileWriter(output)) {
-			writer.write("-- START --\n");
+			writer.write("-- START --\n\n");
 			for (String log : logs) {
 				writer.write(log + "\n");
 			}
-			writer.write("-- END --\n");
+			writer.write("\n-- END --\n");
 
 		} catch (IOException e) {
 			System.err.println("ERR: Logger can't write in file.");

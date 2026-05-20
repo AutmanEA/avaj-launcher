@@ -1,5 +1,7 @@
 package aircraft;
 
+import simulator.SimulationLogger;
+
 public class Balloon extends Aircraft {
 	public Balloon(long p_id, String p_name, Coordinates p_coordinates) {
 		super(p_id, p_name, p_coordinates);
@@ -9,18 +11,26 @@ public class Balloon extends Aircraft {
 		switch (weatherTower.getWeather(coordinates)) {
 			case "SUN":
 				coordinates.changeCoordinates(2, 0, 4);
+				SimulationLogger.newLog(this.printInfos() + ": BALLON SUN MSG");
 				break;
 			case "RAIN":
 				coordinates.changeCoordinates(0, 0, -5);
+				SimulationLogger.newLog(this.printInfos() + ": BALLON RAIN MSG");
 				break;
 			case "FOG":
 				coordinates.changeCoordinates(0, 0, -3);
+				SimulationLogger.newLog(this.printInfos() + ": BALLON FOG MSG");
 				break;
 			case "SNOW":
 				coordinates.changeCoordinates(0, 0, -15);
+				SimulationLogger.newLog(this.printInfos() + ": BALLON SNOW MSG");
 				break;
 			default:
 				break;
 		}
+
+		super.updateConditions();
 	}
 }
+
+

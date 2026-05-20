@@ -10,7 +10,7 @@ public class Main {
 	private static ArrayList<String> parser(Scanner reader) {
 		ArrayList<String> parameters = new ArrayList<String>();
 
-		while (reader.hasNext()) {
+		while (reader.hasNextLine()) {
 			String line = reader.nextLine();
 			if (parameters.isEmpty()) {
 				int simNumber = Integer.parseInt(line);

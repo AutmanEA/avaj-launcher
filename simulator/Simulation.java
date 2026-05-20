@@ -25,24 +25,19 @@ public class Simulation {
 					height = 100;
 
 				Flyable newAircraft = factory.newAircraft(p_type, p_name, lon, lat, height);
-				System.out.println(newAircraft.printInfos());
 				tower.register(newAircraft);
+				newAircraft.registerTower(tower);
 			}
 		}
 	}
 
 	public void run() {
-		ArrayList<Flyable> flyables = new ArrayList<>(tower.getObservers());
+		int count = 1;
 
-		while (simCount > 0) {
-			for (var aircraft: flyables) {
-				aircraft.updateConditions();
-			}
-			simCount--;
+		while (count <= simCount) {
+			SimulationLogger.newLog("\n-- STEP " + count + " --\n");
+			tower.changeWeather();
+			count++;
 		}
-
-
-
-
 	}
 }

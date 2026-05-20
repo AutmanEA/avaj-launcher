@@ -12,12 +12,18 @@ public class Tower {
 		observers.add(p_flyable);
 		SimulationLogger.newLog("Tower says: " + p_flyable.printInfos() + " registered to weather tower.");
 	}
+
 	public void unregister(Flyable p_flyable) {
 		observers.remove(p_flyable);
 		SimulationLogger.newLog("Tower says: " + p_flyable.printInfos() + " unregistered to weather tower.");
 	}
+
 	protected void conditionChanged() {
-		/* */
+		var observersCopy = new ArrayList<>(observers);
+
+		for (var aircraft : observersCopy) {
+			aircraft.updateConditions();
+		}
 	}
 
 	public ArrayList<Flyable> getObservers() {
