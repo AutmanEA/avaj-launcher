@@ -3,72 +3,84 @@ skinparam classAttributeIconSize 0
 hide empty members
 class Tower
 {
--List<Flyable*> observers
-+void register(Flyable* p_flyable)
-+void unregister(Flyable* p_flyable)
-#void conditionChanged()
+	-ArrayList<Flyable> observers
+	+void register(Flyable p_flyable)
+	+void unregister(Flyable p_flyable)
+	#void conditionChanged()
 }
 
 class WeatherTower
 {
-+string getWeather(Coordinates p_coordinates)
-+void changeWeather()
+	-WeatherProvider provider
+	+string getWeather(Coordinates p_coordinates)
+	+void changeWeather()
 }
 
 class WeatherProvider <<Singleton>>
 {
--string[] weather
--WeatherProvider()
-+string getCurrentWeather(Coordinates p_coordinates)
+	-string[] weather
+	+string getCurrentWeather(Coordinates p_coordinates)
 }
 
 class Coordinates
 {
--int longitude
--int latitude
--int height
-~Coordinates(int p_longitude, int p_latitude, int p_height)
-+int getLongitude()
-+int getLatitude()
-+int getHeight()
+	-int longitude
+	-int latitude
+	-int height
+	~Coordinates(int p_longitude, int p_latitude, int p_height)
+	~changeCoordinates(int p_longitude, int p_latitude, int p_height)
+	+int getLongitude()
+	+int getLatitude()
+	+int getHeight()
 }
 
 abstract Aircraft
 {
-#id: long
-#string name
-#Coordinates coordinates
-#Aircraft(long p_id, string p_name, Coordinates p_coordinate)
+	#id: long
+	#string name
+	#Coordinates coordinates
+	#Aircraft(long p_id, string p_name, Coordinates p_coordinate)
+	#WeatherTower weatherTower
 }
 
 interface Flyable
 {
-#WeatherTower weatherTower
-+abstract void updateConditions()
-+registerTower(WeatherTower* p_tower)
+	+void updateConditions()
+	+registerTower(WeatherTower p_tower)
+	+string printInfos()
 }
 
 class Helicopter
 {
-+Helicopter(long p_id, string p_name, Coordinates p_coordinate)
-+void updateConditions()
+	+Helicopter(long p_id, string p_name, Coordinates p_coordinate)
+	+void updateConditions()
 }
 
 class JetPlane
 {
-+JetPlane(long p_id, string p_name, Coordinates p_coordinate)
-+void updateConditions()
+	+JetPlane(long p_id, string p_name, Coordinates p_coordinate)
+	+void updateConditions()
 }
 
 class Balloon
 {
-+Balloon(long p_id, string p_name, Coordinates p_coordinate)
-+void updateConditions()
+	+Balloon(long p_id, string p_name, Coordinates p_coordinate)
+	+void updateConditions()
+}
+
+enum AircraftMessages
+{
+	Balloon
+	JetPlane
+	Helicopter
+	+string getMessage(string weather)
 }
 
 class AircraftFactory <<Singleton>>
 {
-+Flyable* newAircraft(string p_type, string p_name, Coordinates p_coordinates)
+	-long idGenerator
+	+Flyable newAircraft(string p_type, string p_name, Coordinates p_coordinates)
+	+Flyable newAircraft(string p_type, string p_name, int p_longitude, int p_latitude, int p_height)
 }
 
 Tower <|-- WeatherTower
@@ -80,6 +92,7 @@ Aircraft <|-- JetPlane
 Aircraft <|-- Balloon
 
 JetPlane -[hidden]- AircraftFactory
+JetPlane -[hidden]- AircraftMessages
 WeatherTower -[hidden]- WeatherProvider
 
 @enduml
