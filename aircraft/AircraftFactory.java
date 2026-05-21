@@ -18,16 +18,12 @@ public class AircraftFactory {
 		if (p_coordinates == null || p_type == null || p_name == null)
 			throw new AircraftFactoryException("Parameters failed");
 
-		switch (p_type) {
-			case "Helicopter":
-				return new Helicopter(id, p_name, p_coordinates);
-			case "Balloon":
-				return new Balloon(id, p_name, p_coordinates);
-			case "JetPlane":
-				return new JetPlane(id, p_name, p_coordinates);
-			default:
-				throw new AircraftFactoryException("Unkown aircraft type");
-		}
+		return switch (p_type) {
+			case "Helicopter"	-> new Helicopter(id, p_name, p_coordinates);
+			case "Balloon"		-> new Balloon(id, p_name, p_coordinates);
+			case "JetPlane"		-> new JetPlane(id, p_name, p_coordinates);
+			default				-> throw new AircraftFactoryException("Unkown aircraft type");
+		};
 	}
 
 	public Flyable newAircraft(String p_type, String p_name, int longitude, int latitude, int height) throws AircraftFactoryException {
@@ -37,16 +33,12 @@ public class AircraftFactory {
 		if (p_type == null || p_name == null)
 			throw new AircraftFactoryException("Parameters failed");
 
-		switch (p_type) {
-			case "Helicopter":
-				return new Helicopter(id, p_name, coordinates);
-			case "Balloon":
-				return new Balloon(id, p_name, coordinates);
-			case "JetPlane":
-				return new JetPlane(id, p_name, coordinates);
-			default:
-				throw new AircraftFactoryException("Unkown aircraft type");
-		}
+		return switch (p_type) {
+			case "Helicopter"	-> new Helicopter(id, p_name, coordinates);
+			case "Balloon"		-> new Balloon(id, p_name, coordinates);
+			case "JetPlane"		-> new JetPlane(id, p_name, coordinates);
+			default				-> throw new AircraftFactoryException("Unkown aircraft type");
+		};
 	}
 
 	// SINGLETON
