@@ -60,6 +60,8 @@ public class Main {
 			System.err.println("ERR: First line must be an unsigned integer.");
 		} catch (IllegalArgumentException iae) {
 			System.err.println("ERR: Wrong scenario file content.");
+		} catch (Exception e) {
+			System.err.print(e);
 		}
 	}
 }
