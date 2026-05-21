@@ -25,8 +25,4 @@ public class Tower {
 			aircraft.updateConditions();
 		}
 	}
-
-	public ArrayList<Flyable> getObservers() {
-		return observers;
-	}
 }
