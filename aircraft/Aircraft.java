@@ -20,7 +20,7 @@ public class Aircraft implements Flyable {
 		weatherTower = p_tower;
 	}
 
-	public String printInfos() {
+	public final String printInfos() {
 		String type = getClass().getSimpleName();
 
 		return type + "#" + name + "(" + id + ")";
