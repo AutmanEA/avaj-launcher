@@ -31,9 +31,9 @@ public class Main {
 		} catch (SimulationLoggerException sle) {
 			System.err.println("LOGGER_ERROR: " + sle);
 		} catch (FileNotFoundException fnfe) {
-			System.err.print("READER_ERROR: " + fnfe);
+			System.err.println("READER_ERROR: " + fnfe);
 		} catch (Exception e) {
-			System.err.print("Unexcepted Error - " + e);
+			System.err.println("UNKNOWN_ERROR: " + e);
 		}
 	}
 }
