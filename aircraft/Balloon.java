@@ -8,29 +8,16 @@ public class Balloon extends Aircraft {
 	}
 
 	public void updateConditions() {
-		switch (weatherTower.getWeather(coordinates)) {
-			case "SUN":
-				coordinates.changeCoordinates(2, 0, 4);
-				SimulationLogger.newLog(this.printInfos() + ": BALLON SUN MSG");
-				break;
-			case "RAIN":
-				coordinates.changeCoordinates(0, 0, -5);
-				SimulationLogger.newLog(this.printInfos() + ": BALLON RAIN MSG");
-				break;
-			case "FOG":
-				coordinates.changeCoordinates(0, 0, -3);
-				SimulationLogger.newLog(this.printInfos() + ": BALLON FOG MSG");
-				break;
-			case "SNOW":
-				coordinates.changeCoordinates(0, 0, -15);
-				SimulationLogger.newLog(this.printInfos() + ": BALLON SNOW MSG");
-				break;
-			default:
-				break;
+		String weather = weatherTower.getWeather(coordinates);
+		switch (weather) {
+			case "SUN"	-> coordinates.changeCoordinates(2, 0, 4);
+			case "RAIN"	-> coordinates.changeCoordinates(0, 0, -5);
+			case "FOG"	-> coordinates.changeCoordinates(0, 0, -3);
+			case "SNOW"	-> coordinates.changeCoordinates(0, 0, -15);
 		}
+
+		SimulationLogger.newLog(this.printInfos() + ": " + AircraftMessages.BALLOON.getMessage(weather));
 
 		super.updateConditions();
 	}
 }
-
-

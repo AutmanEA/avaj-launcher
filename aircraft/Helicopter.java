@@ -8,26 +8,16 @@ public class Helicopter extends Aircraft {
 	}
 
 	public void updateConditions() {
-		switch (weatherTower.getWeather(coordinates)) {
-			case "SUN":
-				coordinates.changeCoordinates(10, 0, 2);
-				SimulationLogger.newLog(this.printInfos() + ": HELICOPTER SUN MSG");
-				break;
-			case "RAIN":
-				coordinates.changeCoordinates(5, 0, 0);
-				SimulationLogger.newLog(this.printInfos() + ": HELICOPTER RAIN MSG");
-				break;
-			case "FOG":
-				coordinates.changeCoordinates(1, 0, 0);
-				SimulationLogger.newLog(this.printInfos() + ": HELICOPTER FOG MSG");
-				break;
-			case "SNOW":
-				coordinates.changeCoordinates(0, 0, -12);
-				SimulationLogger.newLog(this.printInfos() + ": HELICOPTER SNOW MSG");
-				break;
-			default:
-				break;
+		String weather = weatherTower.getWeather(coordinates);
+
+		switch (weather) {
+			case "SUN"	-> coordinates.changeCoordinates(10, 0, 2);
+			case "RAIN"	-> coordinates.changeCoordinates(5, 0, 0);
+			case "FOG"	-> coordinates.changeCoordinates(1, 0, 0);
+			case "SNOW"	-> coordinates.changeCoordinates(0, 0, -12);
 		}
+
+		SimulationLogger.newLog(this.printInfos() + ": " + AircraftMessages.HELICOPTER.getMessage(weather));
 
 		super.updateConditions();
 	}
