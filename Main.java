@@ -2,6 +2,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 import simulator.SimulationLogger;
 import simulator.Simulation;
@@ -17,13 +19,16 @@ public class Main {
 				if (simNumber < 1) throw new NumberFormatException();
 				parameters.add(line);
 			} else {
-				String regex = "^[a-zA-Z0-9_-]+\\s[a-zA-Z0-9_-]+\\s\\d+\\s\\d+\\s\\d+$";
-				if (!line.matches(regex)) throw new IllegalArgumentException();
-				String[] parseCoordinates = line.split("\\s");
+				String	regex = "^[a-zA-Z0-9_-]+\\s[a-zA-Z0-9_-]+\\s(\\d+)\\s(\\d+)\\s(\\d+)$";
 
-				int lon = Integer.parseInt(parseCoordinates[2]);
-				int lat = Integer.parseInt(parseCoordinates[3]);
-				int height = Integer.parseInt(parseCoordinates[4]);
+				Pattern	pattern = Pattern.compile(regex);
+				Matcher	matcher = pattern.matcher(line);
+
+				if (!matcher.matches()) throw new IllegalArgumentException();
+
+				int lon = Integer.parseInt(matcher.group(1));
+				int lat = Integer.parseInt(matcher.group(2));
+				int height = Integer.parseInt(matcher.group(3));
 
 				if ((lon < 0) || (lat < 0) || (height < 0))
 					throw new NumberFormatException();

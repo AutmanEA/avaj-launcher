@@ -1,5 +1,6 @@
 package simulator;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import aircraft.AircraftFactory;
 import aircraft.Flyable;
@@ -14,12 +15,13 @@ public class Simulation {
 		for (var param : parameters) {
 			if (simCount == 0) simCount = Integer.parseInt(param);
 			else {
-				String[] paramSplit = param.trim().split("\\s+");
-				String p_type = paramSplit[0];
-				String p_name = paramSplit[1];
-				int lon = Integer.parseInt(paramSplit[2]);
-				int lat = Integer.parseInt(paramSplit[3]);
-				int height = Integer.parseInt(paramSplit[4]);
+				Scanner scanner = new Scanner(param);
+				String p_type = scanner.next();
+				String p_name = scanner.next();
+				int lon = scanner.nextInt();
+				int lat = scanner.nextInt();
+				int height = scanner.nextInt();
+				scanner.close();
 
 				if (height > 100)
 					height = 100;
