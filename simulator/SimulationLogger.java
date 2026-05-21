@@ -5,6 +5,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import bonus.SimulationLoggerException;
+
 public class SimulationLogger {
 
 	private static ArrayList<String> logs = new ArrayList<String>();
@@ -13,7 +15,7 @@ public class SimulationLogger {
 		logs.add(log);
 	}
 
-	public static File extractLogs() {
+	public static File extractLogs() throws SimulationLoggerException {
 		File output = new File("simulation.txt");
 
 		try (FileWriter writer = new FileWriter(output)) {
@@ -24,7 +26,7 @@ public class SimulationLogger {
 			writer.write("\n-- END --\n");
 
 		} catch (IOException e) {
-			System.err.println("ERR: Logger can't write in file.");
+			throw new SimulationLoggerException("Logger can't write in file");
 		}
 
 		return output;
