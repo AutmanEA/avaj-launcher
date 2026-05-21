@@ -7,6 +7,8 @@ import aircraft.Flyable;
 import weather.WeatherTower;
 
 public class Simulation {
+	private final int MAX_HEIGHT = 100;
+
 	private int simCount = 0;
 	private AircraftFactory factory = AircraftFactory.getInstance();
 	private WeatherTower tower = new WeatherTower();
@@ -23,8 +25,8 @@ public class Simulation {
 				int height = scanner.nextInt();
 				scanner.close();
 
-				if (height > 100)
-					height = 100;
+				if (height > MAX_HEIGHT)
+					height = MAX_HEIGHT;
 
 				Flyable newAircraft = factory.newAircraft(p_type, p_name, lon, lat, height);
 				tower.register(newAircraft);
