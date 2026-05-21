@@ -8,10 +8,6 @@ public class AircraftFactory {
 
 	private static AtomicLong idGenerator = new AtomicLong(0); // threadsafe long
 
-	public static Coordinates setCoordinates(int lon, int lat, int height) {
-		return new Coordinates(lon, lat, height);
-	}
-
 	public Flyable newAircraft(String p_type, String p_name, Coordinates p_coordinates) throws AircraftFactoryException {
 		long id = idGenerator.getAndIncrement();
 
