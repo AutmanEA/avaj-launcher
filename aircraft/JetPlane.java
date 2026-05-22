@@ -1,5 +1,6 @@
 package aircraft;
 
+import bonus.AircraftConditionException;
 import simulator.SimulationLogger;
 
 public class JetPlane extends Aircraft {
@@ -7,7 +8,7 @@ public class JetPlane extends Aircraft {
 		super(p_id, p_name, p_coordinates);
 	}
 
-	public void updateConditions() {
+	public void updateConditions() throws AircraftConditionException {
 		String weather = weatherTower.getWeather(coordinates);
 
 		switch (weather) {
@@ -15,6 +16,7 @@ public class JetPlane extends Aircraft {
 			case "RAIN"	-> coordinates.changeCoordinates(0, 5, 0);
 			case "FOG"	-> coordinates.changeCoordinates(0, 1, 0);
 			case "SNOW"	-> coordinates.changeCoordinates(0, 0, -7);
+			default		-> throw new AircraftConditionException("Unkown weather");
 		}
 
 		SimulationLogger.newLog(this.printInfos() + ": " + AircraftMessages.JETPLANE.getMessage(weather));

@@ -3,6 +3,8 @@ package weather;
 import java.util.ArrayList;
 
 import aircraft.Flyable;
+import bonus.AircraftConditionException;
+import bonus.TowerConditionException;
 import simulator.SimulationLogger;
 
 public class Tower {
@@ -18,11 +20,15 @@ public class Tower {
 		SimulationLogger.newLog("Tower says: " + p_flyable.printInfos() + " unregistered to weather tower.");
 	}
 
-	protected void conditionChanged() {
+	protected void conditionChanged() throws TowerConditionException {
 		var observersCopy = new ArrayList<>(observers);
 
-		for (var aircraft : observersCopy) {
-			aircraft.updateConditions();
+		try {
+			for (var aircraft : observersCopy) {
+				aircraft.updateConditions();
+			}
+		} catch (AircraftConditionException ace) {
+			throw new TowerConditionException("Tower detected aircraft condition error: " + ace);
 		}
 	}
 }

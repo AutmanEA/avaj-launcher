@@ -1,5 +1,6 @@
 package aircraft;
 
+import bonus.AircraftConditionException;
 import simulator.SimulationLogger;
 import weather.WeatherTower;
 
@@ -9,7 +10,7 @@ public class Aircraft implements Flyable {
 	protected Coordinates	coordinates;
 	protected WeatherTower	weatherTower;
 
-	public void updateConditions() {
+	public void updateConditions() throws AircraftConditionException {
 		if (coordinates.getHeight() <= 0) {
 			SimulationLogger.newLog(this.printInfos() + " landing.");
 			weatherTower.unregister(this);

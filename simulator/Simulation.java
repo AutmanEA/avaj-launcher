@@ -7,6 +7,7 @@ import aircraft.AircraftFactory;
 import aircraft.Flyable;
 import bonus.AircraftFactoryException;
 import bonus.SimulationException;
+import bonus.TowerConditionException;
 import weather.WeatherTower;
 
 public class Simulation {
@@ -43,13 +44,17 @@ public class Simulation {
 		}
 	}
 
-	public void run() {
+	public void run() throws SimulationException {
 		int count = 1;
 
-		while (count <= simCount) {
-			SimulationLogger.newLog("\n-- STEP " + count + " --\n");
-			tower.changeWeather();
-			count++;
+		try {
+			while (count <= simCount) {
+				SimulationLogger.newLog("\n-- STEP " + count + " --\n");
+				tower.changeWeather();
+				count++;
+			}
+		} catch (TowerConditionException tce) {
+			throw new SimulationException("Tower failure :" + tce);
 		}
 	}
 }
