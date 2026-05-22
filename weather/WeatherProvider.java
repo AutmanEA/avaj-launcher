@@ -3,12 +3,12 @@ package weather;
 import aircraft.Coordinates;
 
 public class WeatherProvider {
-	
+
 	private final String[] weather = {"RAIN", "FOG", "SUN", "SNOW"};
 
 	public String getCurrentWeather(Coordinates p_coordinates) {
-		int weatherIndex = (p_coordinates.getHeight() + p_coordinates.getLatitude() + p_coordinates.getLongitude()) % 3;
-		return weather[weatherIndex];
+		int weatherIndex = (p_coordinates.getHeight() * 83 + p_coordinates.getLatitude() * 41 + p_coordinates.getLongitude() * 17);
+		return weather[Math.abs(weatherIndex) % 4];
 	}
 
 	// SINGLETON
